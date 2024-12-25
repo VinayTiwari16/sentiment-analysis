@@ -34,7 +34,6 @@ netstat -tuln | grep 8080
 
 netstat -an | find "8080"
 
-curl -X POST http://localhost:5000/analyse/sentiment -H "Content-Type: application/json" -d '{"sentence": "I love this new AI tool!"}'
 
 curl -X POST http://localhost:5000/analyze -H "Content-Type: application/json" -d '{"text": "This is a fantastic tool!"}'
 
