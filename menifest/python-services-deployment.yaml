@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-services
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-services
+  template:
+    metadata:
+      labels:
+        app: python-services
+    spec:
+      containers:
+      - name: python-services
+        image: python-services:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000 # Replace with your app's port

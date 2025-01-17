@@ -1,0 +1,43 @@
+apiVersion: skaffold/v2beta30
+kind: Config
+metadata:
+  name: sentiment-analysis
+build:
+  artifacts:
+  - image: python-service
+    context: python-service
+    docker:
+      dockerfile: python-service/Dockerfile
+  artifacts:
+  - image: backend-spring:local
+    context: backend
+    docker:
+      dockerfile: Dockerfile
+  - image: python-service:local
+    context: python-service
+    docker:
+      dockerfile: python-service/Dockerfile
+  - image: frontend-node:local
+    context: frontend
+    docker:
+      dockerfile: Dockerfile
+  local:
+    push: false
+deploy:
+  helm:
+    releases:
+    - name: backend
+      chartPath: backend/helm-chart
+      values:
+        image.repository: backend-spring
+        image.tag: local
+    - name: python-service
+      chartPath: python-service/helm-chart
+      values:
+        image.repository: python-service
+        image.tag: local
+    - name: frontend
+      chartPath: frontend/helm-chart
+      values:
+        image.repository: frontend-node
+        image.tag: local
