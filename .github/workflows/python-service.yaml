@@ -6,7 +6,7 @@ on:
 permission: 
   contents: read 
 
-job: 
+jobs: 
   Build-python-app: 
     name: build-pthon-app
     runs-on: ubuntu-latest
