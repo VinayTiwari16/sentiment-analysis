@@ -20,11 +20,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
+   - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
       with:
-        project_id: ${{env.PROJECT_ID}}
-        service_account_key: '${{ secrets.GOOGLE_CREDENTIALS }}'
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
 
     - name: Build Docker Image
       run: |
